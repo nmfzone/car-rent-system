@@ -76,7 +76,7 @@ class CarsController extends Controller
      */
     public function edit(Car $car)
     {
-        return view('cars.edit');
+        return view('cars.edit', compact('car'));
     }
 
     /**
@@ -89,6 +89,8 @@ class CarsController extends Controller
     public function update(CarRequest $request, Car $car)
     {
         $car->update($request->all());
+        $car->car_type_id = $request->type;
+        $car->save();
 
         flash('Mobil berhasil di perbarui.')->success()->important();
 
