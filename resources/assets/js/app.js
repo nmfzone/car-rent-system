@@ -7,6 +7,8 @@
 
 require('./bootstrap');
 require('./custom');
+require('moment');
+require('bootstrap-daterangepicker');
 
 window.Vue = require('vue');
 

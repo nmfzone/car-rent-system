@@ -39,6 +39,46 @@ class User extends Authenticatable
     }
 
     /**
+     * Scope a query to only include user with type Customer.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeCustomer($query)
+    {
+        return $query->where('type', 'CUSTOMER');
+    }
+
+    /**
+     * Scope a query to only include user with type Owner.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOwner($query)
+    {
+        return $query->where('type', 'OWNER');
+    }
+
+    /**
+     * Determine the user is customer.
+     *
+     * @return boolean
+     */
+    public function isCustomer()
+    {
+        return $this->attributes['type'] === 'CUSTOMER';
+    }
+
+    /**
+     * Determine the user is owner.
+     *
+     * @return boolean
+     */
+    public function isOwner()
+    {
+        return $this->attributes['type'] === 'OWNER';
+    }
+
+    /**
      * Get the user bookings.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

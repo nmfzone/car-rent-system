@@ -11,7 +11,9 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+
+    @stack('stylesheets')
 
     <!-- Scripts -->
     <script>
@@ -95,14 +97,21 @@
                     <ul class="nav menu-stacked-tabs" role="tablist">
                       <li class="active">
                         <a href="{{ route('dashboard') }}">
-                          <i class="fa fa-fw fa-btn fa-home"></i>Dashboard
+                          <i class="fa fa-fw fa-btn fa-home"></i>&nbsp;&nbsp;Dashboard
                         </a>
                       </li>
-                      <li>
-                        <a href="{{ route('cars.index') }}">
-                          <i class="fa fa-fw fa-btn fa-home"></i>Mobil
-                        </a>
-                      </li>
+                      @if (auth()->user()->isOwner())
+                        <li>
+                          <a href="{{ route('cars.index') }}">
+                            <i class="fa fa-fw fa-btn fa-car"></i>&nbsp;&nbsp;Mobil
+                          </a>
+                        </li>
+                        <li>
+                          <a href="{{ route('bookings.index') }}">
+                            <i class="fa fa-fw fa-btn fa-shopping-cart"></i>&nbsp;&nbsp;Booking
+                          </a>
+                        </li>
+                      @endif
                     </ul>
                   </div>
                 </div>
@@ -117,6 +126,8 @@
     </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ mix('js/app.js') }}"></script>
+
+    @stack('javascripts')
 </body>
 </html>

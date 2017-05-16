@@ -26,6 +26,7 @@
           <tr>
             <th>#</th>
             <th>Nama</th>
+            <th>Nomor Plat</th>
             <th>Merek</th>
             <th>Aksi</th>
           </tr>
@@ -35,6 +36,7 @@
             <tr>
               <td>{{ $car->id }}</td>
               <td>{{ $car->name }}</td>
+              <td>{{ $car->car_number }}</td>
               <td>{{ $car->carType->name }}</td>
               <td>
                 <a href="{{ route('cars.edit', $car) }}" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Perbarui</a>

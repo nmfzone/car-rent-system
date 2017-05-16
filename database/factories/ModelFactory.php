@@ -50,3 +50,13 @@ $factory->define(App\Car::class, function (Faker\Generator $faker) {
         'car_type_id' => App\CarType::all()->random()->id,
     ];
 });
+
+$factory->define(App\Booking::class, function (Faker\Generator $faker) {
+    return [
+        'user_id' => App\User::customer()->get()->random()->id,
+        'car_id' => App\Car::free()->get()->random()->id,
+        'price' => $faker->randomElement([500000, 1000000, 1500000, 2000000]),
+        'date_start' => \Carbon\Carbon::now(),
+        'date_finish' => \Carbon\Carbon::now()->addWeeks(rand(1, 52)),
+    ];
+});

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Car extends Model
@@ -33,5 +34,18 @@ class Car extends Model
     public function carType()
     {
         return $this->belongsTo(CarType::class);
+    }
+
+    /**
+     * Scope a query to only include car that's free.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeFree($query)
+    {
+        return $query->whereDoesntHave('bookings')
+            ->orWhereHas('bookings', function ($query) {
+                $query->where('date_finish', '<', Carbon::now());
+            });
     }
 }

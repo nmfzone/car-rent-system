@@ -64,7 +64,7 @@
           <div class="col-md-6 col-md-offset-4">
             <a href="{{ URL::previous() }}" class="btn btn-default">Kembali</a>
             <button type="submit" class="btn btn-primary">
-              <i class="fa fa-btn fa-user"></i> Simpan
+              <i class="fa fa-btn fa-save"></i> Simpan
             </button>
           </div>
         </div>
