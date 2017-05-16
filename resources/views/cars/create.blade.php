@@ -16,7 +16,7 @@
           <label class="col-md-4 control-label">Nama</label>
 
           <div class="col-md-6">
-            <input type="text" class="form-control" name="name" value="{{ old('name') }}">
+            <input type="text" class="form-control" name="name" value="{{ old('name') }}" required>
 
             @if ($errors->has('name'))
               <span class="help-block">
@@ -30,7 +30,7 @@
           <label class="col-md-4 control-label">Nomor Plat</label>
 
           <div class="col-md-6">
-            <input type="text" class="form-control" name="car_number" value="{{ old('car_number') }}">
+            <input type="text" class="form-control" name="car_number" value="{{ old('car_number') }}" required>
 
             @if ($errors->has('car_number'))
               <span class="help-block">
@@ -44,7 +44,7 @@
           <label class="col-md-4 control-label">Merek</label>
 
           <div class="col-md-6">
-            <select class="form-control" name="type">
+            <select class="form-control" name="type" required>
               @foreach(\App\CarType::all() as $type)
                 <option value="{{ $type->id }}" {{ old('type') == $type->id ? 'selected' : '' }}>{{ $type->name }}</option>
               @endforeach
