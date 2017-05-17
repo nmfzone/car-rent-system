@@ -32,7 +32,7 @@
           </tr>
         </thead>
         <tbody>
-          @foreach ($users as $index => $user)
+          @forelse ($users as $index => $user)
             <tr>
               <td>{{ $user->id }}</td>
               <td>{{ $user->name }}</td>
@@ -48,7 +48,13 @@
                 <a href="{{ route('users.edit', $user) }}" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Perbarui</a>
                 <a href="{{ route('users.destroy', $user) }}" class="btn btn-xs btn-primary delete-this"><i class="glyphicon glyphicon-remove"></i> Hapus</a>
             </tr>
-          @endforeach
+          @empty
+            <tr>
+              <td colspan="5">
+                <center class="m-t-lg">Data pengguna belum tersedia.</center>
+              </td>
+            </tr>
+          @endforelse
         </tbody>
       </table>
 

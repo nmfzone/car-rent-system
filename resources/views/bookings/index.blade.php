@@ -32,7 +32,7 @@
           </tr>
         </thead>
         <tbody>
-          @foreach ($bookings as $index => $booking)
+          @forelse ($bookings as $index => $booking)
             <tr>
               <td>{{ $booking->id }}</td>
               <td>{{ $booking->user->name }}</td>
@@ -43,7 +43,13 @@
                 <a href="{{ route('bookings.edit', $booking) }}" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Perbarui</a>
                 <a href="{{ route('bookings.destroy', $booking) }}" class="btn btn-xs btn-primary delete-this"><i class="glyphicon glyphicon-remove"></i> Hapus</a>
             </tr>
-          @endforeach
+          @empty
+            <tr>
+              <td colspan="5">
+                <center class="m-t-lg">Data booking belum tersedia.</center>
+              </td>
+            </tr>
+          @endforelse
         </tbody>
       </table>
 

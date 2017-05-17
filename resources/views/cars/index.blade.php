@@ -33,7 +33,7 @@
           </tr>
         </thead>
         <tbody>
-          @foreach ($cars as $index => $car)
+          @forelse ($cars as $index => $car)
             <tr>
               <td>{{ $car->id }}</td>
               <td>{{ $car->name }}</td>
@@ -50,7 +50,13 @@
                 <a href="{{ route('cars.edit', $car) }}" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Perbarui</a>
                 <a href="{{ route('cars.destroy', $car) }}" class="btn btn-xs btn-primary delete-this"><i class="glyphicon glyphicon-remove"></i> Hapus</a>
             </tr>
-          @endforeach
+          @empty
+            <tr>
+              <td colspan="6">
+                <center class="m-t-lg">Data mobil belum tersedia.</center>
+              </td>
+            </tr>
+          @endforelse
         </tbody>
       </table>
 
