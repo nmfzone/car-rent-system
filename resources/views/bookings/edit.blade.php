@@ -109,7 +109,7 @@
 
         {!! csrf_field() !!}
 
-        <div class="form-group">
+        <div class="form-group m-t-lg">
           <div class="col-md-6 col-md-offset-4">
             <a href="{{ URL::previous() }}" class="btn btn-default">Kembali</a>
             <button type="submit" class="btn btn-primary">

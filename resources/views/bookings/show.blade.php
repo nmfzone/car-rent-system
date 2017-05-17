@@ -20,7 +20,12 @@
           <label class="col-md-4 control-label">User</label>
 
           <div class="col-md-6">
-            <input type="text" class="form-control" value="{{ $booking->user->name }}" disabled />
+            <div class="input-group">
+              <input type="text" class="form-control" value="{{ $booking->user->name }}" disabled />
+              <span class="input-group-addon">
+                <a href="{{ route('users.show', $booking->user) }}"><i class="glyphicon glyphicon-zoom-in"></i></a>
+              </span>
+            </div>
 
             @if ($errors->has('user'))
               <span class="help-block">
@@ -34,7 +39,12 @@
           <label class="col-md-4 control-label">Mobil</label>
 
           <div class="col-md-6">
-            <input type="text" class="form-control" value="{{ $booking->car->name }} ({{ $booking->car->car_number }})" disabled />
+            <div class="input-group">
+              <input type="text" class="form-control" value="{{ $booking->car->name }} ({{ $booking->car->car_number }})" disabled />
+              <span class="input-group-addon">
+                <a href="{{ route('cars.show', $booking->car) }}"><i class="glyphicon glyphicon-zoom-in"></i></a>
+              </span>
+            </div>
 
             @if ($errors->has('car'))
               <span class="help-block">
@@ -93,7 +103,7 @@
           <label class="col-md-4 control-label">Catatan</label>
 
           <div class="col-md-6">
-            <textarea class="form-control" name="note" rows="4" disabled>{{ $booking->note ?? '-' }}</textarea>
+            <textarea class="form-control" rows="4" disabled>{{ $booking->note ?? '-' }}</textarea>
 
             @if ($errors->has('note'))
               <span class="help-block">
@@ -102,8 +112,6 @@
             @endif
           </div>
         </div>
-
-        {!! csrf_field() !!}
 
         <div class="form-group m-t-lg">
           <div class="col-md-6 col-md-offset-4">

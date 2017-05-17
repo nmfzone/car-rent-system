@@ -51,13 +51,14 @@ class BookingsController extends Controller
      */
     public function store(BookingRequest $request)
     {
-        try {
-            $booking = new Booking($request->all());
-            $booking = $this->fillBooking($booking, $request);
-            $booking->save();
-        } catch (\Exception $e) {
-            flash('Terjadi kesalahan, silahkan coba lagi.')->error()->important();
+        $booking = new Booking($request->all());
+        $booking = $this->fillBooking($booking, $request);
+
+        if (! $booking instanceof Booking) {
+            return $booking;
         }
+
+        $booking->save();
 
         flash('Booking berhasil di simpan.')->success()->important();
 
@@ -97,6 +98,11 @@ class BookingsController extends Controller
     {
         $booking->fill($request->all());
         $booking = $this->fillBooking($booking, $request);
+
+        if (! $booking instanceof Booking) {
+            return $booking;
+        }
+
         $booking->save();
 
         flash('Booking berhasil di perbarui.')->success()->important();
@@ -127,12 +133,18 @@ class BookingsController extends Controller
      */
     protected function fillBooking(Booking $booking, $request)
     {
-        $date = explode(' - ', $request->booking_dates);
+        try {
+            $date = explode(' - ', $request->booking_dates);
 
-        $booking->user_id = $request->user;
-        $booking->car_id = $request->car;
-        $booking->date_start = Carbon::createFromFormat('d/m/Y H:i', $date[0]);
-        $booking->date_finish = Carbon::createFromFormat('d/m/Y H:i', $date[1]);
+            $booking->user_id = $request->user;
+            $booking->car_id = $request->car;
+            $booking->date_start = Carbon::createFromFormat('d/m/Y H:i', $date[0]);
+            $booking->date_finish = Carbon::createFromFormat('d/m/Y H:i', $date[1]);
+        } catch (\Exception $e) {
+            flash('Terjadi kesalahan, silahkan coba lagi.')->error()->important();
+
+            return redirect()->back();
+        }
 
         return $booking;
     }

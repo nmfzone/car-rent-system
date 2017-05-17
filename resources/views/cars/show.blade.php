@@ -11,14 +11,12 @@
     <div class="panel-body">
       @include('flash::message')
 
-      <form class="form-horizontal" role="form" method="POST" action="{{ route('cars.update', $car) }}">
-        {{ method_field('PUT') }}
-
+      <form class="form-horizontal" role="form" method="POST" action="#">
         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
           <label class="col-md-4 control-label">Nama</label>
 
           <div class="col-md-6">
-            <input type="text" class="form-control" name="name" value="{{ old('name', $car->name) }}" required>
+            <input type="text" class="form-control" value="{{ $car->name }}" disabled>
 
             @if ($errors->has('name'))
               <span class="help-block">
@@ -32,7 +30,7 @@
           <label class="col-md-4 control-label">Nomor Plat</label>
 
           <div class="col-md-6">
-            <input type="text" class="form-control" name="car_number" value="{{ old('car_number', $car->car_number) }}" required>
+            <input type="text" class="form-control" value="{{ $car->car_number }}" disabled>
 
             @if ($errors->has('car_number'))
               <span class="help-block">
@@ -46,11 +44,7 @@
           <label class="col-md-4 control-label">Merek</label>
 
           <div class="col-md-6">
-            <select class="form-control" name="type" required>
-              @foreach(\App\CarType::all() as $type)
-                <option value="{{ $type->id }}" {{ old('type', $car->car_type_id) == $type->id ? 'selected' : '' }}>{{ $type->name }}</option>
-              @endforeach
-            </select>
+            <input type="text" class="form-control" value="{{ $car->carType->name }}" disabled>
 
             @if ($errors->has('type'))
               <span class="help-block">
@@ -60,14 +54,10 @@
           </div>
         </div>
 
-        {!! csrf_field() !!}
-
         <div class="form-group m-t-lg">
           <div class="col-md-6 col-md-offset-4">
             <a href="{{ URL::previous() }}" class="btn btn-default">Kembali</a>
-            <button type="submit" class="btn btn-primary">
-              <i class="fa fa-btn fa-save"></i> Perbarui
-            </button>
+            <a href="{{ route('cars.edit', $car) }}" class="btn btn-primary"><i class="fa fa-btn fa-edit"></i> Perbarui</a>
           </div>
         </div>
       </form>

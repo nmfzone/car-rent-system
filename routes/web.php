@@ -20,7 +20,7 @@ Auth::routes();
 Route::group(['prefix' => 'dashboard'], function() {
     Route::get('/', 'DashboardController@index')->name('dashboard');
 
+    Route::resource('/users', 'UsersController');
     Route::resource('/cars', 'CarsController');
-
     Route::resource('/bookings', 'BookingsController');
 });

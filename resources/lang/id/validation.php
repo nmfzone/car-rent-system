@@ -129,6 +129,7 @@ return [
         'address'                   => 'alamat',
         'note'                      => 'catatan',
         'booking_dates'             => 'tanggal penggunaan',
+        'phone'                     => 'nomor HP',
     ],
 
 ];

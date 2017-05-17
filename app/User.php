@@ -39,6 +39,23 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the user type representation in number.
+     *
+     * @return integer|null
+     */
+    public function getTypeInNumberAttribute()
+    {
+        switch (strtoupper($this->attributes['type'])) {
+            case 'OWNER':
+                return 1;
+            case 'CUSTOMER':
+                return 2;
+            default:
+                return null;
+        }
+    }
+
+    /**
      * Scope a query to only include user with type Customer.
      *
      * @return \Illuminate\Database\Eloquent\Builder
@@ -86,5 +103,16 @@ class User extends Authenticatable
     public function bookings()
     {
         return $this->hasMany(Booking::class);
+    }
+
+    /**
+     * Assign the user with given type.
+     *
+     * @param  string  $value
+     * @return void
+     */
+    public function assign($value)
+    {
+        $this->attributes['type'] = strtoupper($value);
     }
 }

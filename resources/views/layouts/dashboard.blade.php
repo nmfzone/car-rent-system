@@ -102,6 +102,11 @@
                       </li>
                       @if (auth()->user()->isOwner())
                         <li>
+                          <a href="{{ route('users.index') }}">
+                            <i class="fa fa-fw fa-btn fa-users"></i>&nbsp;&nbsp;Pengguna
+                          </a>
+                        </li>
+                        <li>
                           <a href="{{ route('cars.index') }}">
                             <i class="fa fa-fw fa-btn fa-car"></i>&nbsp;&nbsp;Mobil
                           </a>

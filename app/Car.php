@@ -48,4 +48,14 @@ class Car extends Model
                 $query->where('date_finish', '<', Carbon::now());
             });
     }
+
+    /**
+     * Determine car booked.
+     *
+     * @return boolean
+     */
+    public function isBooked()
+    {
+        return ! is_null($this->bookings()->ongoing()->first());
+    }
 }

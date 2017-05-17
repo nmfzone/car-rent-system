@@ -15,7 +15,7 @@
     <div class="panel-body">
       @include('flash::message')
 
-      <form class="form-horizontal" role="form" method="POST" action="{{ route('cars.store') }}">
+      <form class="form-horizontal" role="form" method="POST" action="{{ route('bookings.store') }}">
         <div class="form-group{{ $errors->has('user') ? ' has-error' : '' }}">
           <label class="col-md-4 control-label">User</label>
 
@@ -69,15 +69,15 @@
           </div>
         </div>
 
-        <div class="form-group{{ $errors->has('dates') ? ' has-error' : '' }}">
+        <div class="form-group{{ $errors->has('booking_dates') ? ' has-error' : '' }}">
           <label class="col-md-4 control-label">Tanggal Penggunaan</label>
 
           <div class="col-md-6">
-            <input type="text" class="form-control daterange-picker" name="dates" value="{{ old('dates') }}" required>
+            <input type="text" class="form-control daterange-picker" name="booking_dates" value="{{ old('booking_dates') }}" required>
 
-            @if ($errors->has('dates'))
+            @if ($errors->has('booking_dates'))
               <span class="help-block">
-                <strong>{{ $errors->first('dates') }}</strong>
+                <strong>{{ $errors->first('booking_dates') }}</strong>
               </span>
             @endif
           </div>

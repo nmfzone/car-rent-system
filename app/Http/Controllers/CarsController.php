@@ -25,7 +25,10 @@ class CarsController extends Controller
      */
     public function index()
     {
-        $cars = Car::with('carType')->paginate(10);
+        $cars = Car::with([
+            'carType',
+            'bookings',
+        ])->paginate(10);
 
         return view('cars.index', compact('cars'));
     }
@@ -65,7 +68,7 @@ class CarsController extends Controller
      */
     public function show(Car $car)
     {
-        return abort(404);
+        return view('cars.show', compact('car'));
     }
 
     /**

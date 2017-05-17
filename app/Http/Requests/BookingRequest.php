@@ -34,7 +34,6 @@ class BookingRequest extends FormRequest
 
         switch ($this->method()) {
             case 'POST':
-                return $rules->toArray();
             case 'PUT':
             case 'PATCH':
                 return $rules->toArray();
