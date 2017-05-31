@@ -23,4 +23,5 @@ Route::group(['prefix' => 'dashboard'], function() {
     Route::resource('/users', 'UsersController');
     Route::resource('/cars', 'CarsController');
     Route::resource('/bookings', 'BookingsController');
+    Route::get('/checks', 'ChecksController@index')->name('checks.index');
 });

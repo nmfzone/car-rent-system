@@ -29,6 +29,7 @@ class Booking extends Model
     /**
      * Scope a query to only include booking that's ongoing.
      *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeOngoing($query)

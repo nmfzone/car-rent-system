@@ -9,6 +9,7 @@ require('./bootstrap');
 require('./custom');
 require('moment');
 require('bootstrap-daterangepicker');
+require('bootstrap-datepicker');
 
 window.Vue = require('vue');
 

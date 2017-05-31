@@ -97,7 +97,7 @@
                     <ul class="nav menu-stacked-tabs" role="tablist">
                       <li class="active">
                         <a href="{{ route('dashboard') }}">
-                          <i class="fa fa-fw fa-btn fa-home"></i>&nbsp;&nbsp;Dashboard
+                          <i class="fa fa-fw fa-btn fa-home"></i>&nbsp;&nbsp;Beranda
                         </a>
                       </li>
                       @if (auth()->user()->isOwner())
@@ -114,6 +114,11 @@
                         <li>
                           <a href="{{ route('bookings.index') }}">
                             <i class="fa fa-fw fa-btn fa-shopping-cart"></i>&nbsp;&nbsp;Booking
+                          </a>
+                        </li>
+                        <li>
+                          <a href="{{ route('checks.index') }}">
+                            <i class="fa fa-fw fa-btn fa-calendar"></i>&nbsp;&nbsp;Cek Ketersediaan
                           </a>
                         </li>
                       @endif

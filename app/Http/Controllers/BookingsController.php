@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Car;
 use App\Booking;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -11,8 +12,6 @@ class BookingsController extends Controller
 {
     /**
      * Create a new controller instance.
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -22,13 +21,26 @@ class BookingsController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $bookings = Booking::with([
             'car', 'user',
-        ])->paginate(10);
+        ]);
+
+        if (! is_null($request->date)) {
+            try {
+                $bookings = $bookings->where('date_start', '>=',
+                    Carbon::createFromFormat('d/m/Y H:i', $request->date . " 00:00")
+                );
+            } catch (\Exception $e) {
+                //
+            }
+        }
+
+        $bookings = $bookings->paginate(10);
 
         return view('bookings.index', compact('bookings'));
     }
@@ -140,6 +152,12 @@ class BookingsController extends Controller
             $booking->car_id = $request->car;
             $booking->date_start = Carbon::createFromFormat('d/m/Y H:i', $date[0]);
             $booking->date_finish = Carbon::createFromFormat('d/m/Y H:i', $date[1]);
+
+            if (is_null(Car::freeOn($booking->date_start, $booking->date_finish)->whereId($request->car)->first())) {
+                flash('Mobil sudah ada yang booking.')->error()->important();
+
+                return redirect()->back();
+            }
         } catch (\Exception $e) {
             flash('Terjadi kesalahan, silahkan coba lagi.')->error()->important();
 

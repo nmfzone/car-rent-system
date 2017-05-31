@@ -39,6 +39,7 @@ class Car extends Model
     /**
      * Scope a query to only include car that's free.
      *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeFree($query)
@@ -50,12 +51,23 @@ class Car extends Model
     }
 
     /**
-     * Determine car booked.
+     * Scope a query to only include car that's free on given date.
      *
-     * @return boolean
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param  \Carbon\Carbon  $from
+     * @param  \Carbon\Carbon  $until
+     * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function isBooked()
+    public function scopeFreeOn($query, Carbon $from, Carbon $until)
     {
-        return ! is_null($this->bookings()->ongoing()->first());
+        return $query->whereDoesntHave('bookings', function ($query) use ($from, $until) {
+                $query->where(function ($query) use ($from, $until) {
+                    $query->where('date_start', '>=', $from)
+                        ->where('date_finish', '<=', $until);
+                })->orWhere(function ($query) use ($from, $until) {
+                    $query->where('date_finish', '>=', $from)
+                        ->where('date_start', '<=', $until);
+                });
+            });
     }
 }

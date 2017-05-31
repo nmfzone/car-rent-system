@@ -47,6 +47,7 @@
               <td>
                 <a href="{{ route('users.edit', $user) }}" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Perbarui</a>
                 <a href="{{ route('users.destroy', $user) }}" class="btn btn-xs btn-primary delete-this"><i class="glyphicon glyphicon-remove"></i> Hapus</a>
+              </td>
             </tr>
           @empty
             <tr>

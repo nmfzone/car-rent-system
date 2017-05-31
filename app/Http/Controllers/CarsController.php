@@ -10,8 +10,6 @@ class CarsController extends Controller
 {
     /**
      * Create a new controller instance.
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -27,7 +25,6 @@ class CarsController extends Controller
     {
         $cars = Car::with([
             'carType',
-            'bookings',
         ])->paginate(10);
 
         return view('cars.index', compact('cars'));
