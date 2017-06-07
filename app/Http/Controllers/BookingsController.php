@@ -30,11 +30,20 @@ class BookingsController extends Controller
             'car', 'user',
         ]);
 
-        if (! is_null($request->date)) {
+        if (! is_null($request->date_range)) {
+            $dates = explode(' - ', $request->date_range);
+
             try {
-                $bookings = $bookings->where('date_start', '>=',
-                    Carbon::createFromFormat('d/m/Y H:i', $request->date . " 00:00")
-                );
+                $from = Carbon::createFromFormat('d/m/Y H:i', $dates[0]);
+                $until = Carbon::createFromFormat('d/m/Y H:i', $dates[1]);
+
+                $bookings = $bookings->where(function ($query) use ($from, $until) {
+                    $query->where('date_start', '>=', $from)
+                        ->where('date_finish', '<=', $until);
+                })->orWhere(function ($query) use ($from, $until) {
+                    $query->where('date_finish', '>=', $from)
+                        ->where('date_start', '<=', $until);
+                });
             } catch (\Exception $e) {
                 //
             }

@@ -21,10 +21,10 @@
         <div class="pull-left col-md-8">
           <form class="form-inline" role="form" method="GET" action="{{ route('bookings.index') }}">
             <div class="form-group col-md-10">
-              <label class="col-md-2">Tanggal</label>
+              <label class="col-md-4">Lihat Riwayat</label>
 
-              <div class="col-md-10">
-                <input type="text" class="form-control datepicker" name="date" value="{!! request()->get('date', sprintf('%s', date('d/m/Y'))) !!}" required>
+              <div class="col-md-8">
+                <input type="text" class="form-control daterange-picker" name="date_range" value="{!! request()->get('date_range', sprintf('%s 00:00 - %s 23:00', date('d/m/Y'), date('d/m/Y'))) !!}" required>
               </div>
             </div>
 
@@ -93,8 +93,13 @@
 @push('javascripts')
 <script type="text/javascript">
   $(document).ready(function () {
-    $('input.datepicker').datepicker({
-      format: "dd/mm/yyyy"
+    $('input.daterange-picker').daterangepicker({
+      timePicker: true,
+      timePicker24Hour: true,
+      timePickerIncrement: 10,
+      locale: {
+        format: 'DD/MM/YYYY H:mm'
+      }
     });
   });
 </script>
