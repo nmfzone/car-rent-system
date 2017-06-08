@@ -52,6 +52,7 @@
             <th>#</th>
             <th>Nama Penyewa</th>
             <th>Nama Mobil</th>
+            <th>Tanggal</th>
             <th width="150px">Harga</th>
             <th width="220px">Aksi</th>
           </tr>
@@ -61,6 +62,7 @@
             <tr>
               <td>{{ $booking->id }}</td>
               <td>{{ $booking->user->name }}</td>
+              <td>{{ $booking->date_start->format('d/m/Y')  }} - {{ $booking->date_finish->format('d/m/Y') }}</td>
               <td>{{ $booking->car->name }} ({{ $booking->car->car_number }})</td>
               <td>Rp {{ number_format($booking->price, 2, ',', '.') }}</td>
               <td>
